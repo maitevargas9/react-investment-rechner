@@ -3,7 +3,7 @@ import {
   currencyFormatter
 } from "../util/investment.js";
 
-export default function Results({ input }) {
+export default function Results({ userInput }) {
   const rows = [
     "Year",
     "Investment value",
@@ -11,6 +11,13 @@ export default function Results({ input }) {
     "Total interest income",
     "Total invested capital"
   ];
+
+  const resultsData = computeInvestmentGrowth(userInput);
+
+  const initialInvestment =
+    resultsData[0].valueEndOfYear -
+    resultsData[0].interest -
+    resultsData[0].annualInvestment;
 
   return (
     <div>
@@ -24,6 +31,27 @@ export default function Results({ input }) {
             )}
           </tr>
         </thead>
+        <tbody>
+          {resultsData.map(row =>
+            <tr key={row.year}>
+              <td>
+                {row.year}
+              </td>
+              <td>
+                {currencyFormatter.format(initialInvestment)}
+              </td>
+              <td>
+                {currencyFormatter.format(row.annualInvestment)}
+              </td>
+              <td>
+                {currencyFormatter.format(row.totalInvested)}
+              </td>
+              <td>
+                {currencyFormatter.format(row.valueEndOfYear)}
+              </td>
+            </tr>
+          )}
+        </tbody>
       </table>
     </div>
   );

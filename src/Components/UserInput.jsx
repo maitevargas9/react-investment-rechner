@@ -1,17 +1,12 @@
 import { useState } from "react";
 
-export default function UserInput({ onChangeData }) {
-  const [values, setValues] = useState({
-    initialInvestment: 10000,
-    annualInvestment: 1200,
-    yield: 6,
-    duration: 10
-  });
-
+export default function UserInput({ userInput, setUserInput }) {
   const handleChange = e => {
     const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-    onChangeData(values);
+    setUserInput(prev => ({
+      ...prev,
+      [name]: value === "" ? "" : Number(value)
+    }));
   };
 
   return (
@@ -21,34 +16,34 @@ export default function UserInput({ onChangeData }) {
         <input
           type="number"
           name="initialInvestment"
-          value={values.initialInvestment}
+          value={userInput.initialInvestment}
           onChange={handleChange}
         />
       </label>
       <label>
-        Jahrliche Investition
+        Annual Investment
         <input
           type="number"
           name="annualInvestment"
-          value={values.annualInvestment}
+          value={userInput.annualInvestment}
           onChange={handleChange}
         />
       </label>
       <label>
-        Erwartete Rendite
+        Yield
         <input
           type="number"
           name="yield"
-          value={values.yield}
+          value={userInput.yield}
           onChange={handleChange}
         />
       </label>
       <label>
-        Dauer
+        Duration
         <input
           type="number"
           name="duration"
-          value={values.duration}
+          value={userInput.duration}
           onChange={handleChange}
         />
       </label>
