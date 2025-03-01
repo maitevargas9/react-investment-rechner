@@ -21,8 +21,8 @@ export default function Results({ userInput }) {
 
   return (
     <div>
-      <table>
-        <thead>
+      <table id="result">
+        <thead id="result thead">
           <tr>
             {rows.map((row, index) =>
               <th key={index}>
@@ -31,7 +31,7 @@ export default function Results({ userInput }) {
             )}
           </tr>
         </thead>
-        <tbody>
+        <tbody id="result tbody">
           {resultsData.map(row =>
             <tr key={row.year}>
               <td>
