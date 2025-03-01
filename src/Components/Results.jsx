@@ -38,16 +38,21 @@ export default function Results({ userInput }) {
                 {row.year}
               </td>
               <td>
-                {currencyFormatter.format(initialInvestment)}
-              </td>
-              <td>
-                {currencyFormatter.format(row.annualInvestment)}
-              </td>
-              <td>
-                {currencyFormatter.format(row.totalInvested)}
-              </td>
-              <td>
                 {currencyFormatter.format(row.valueEndOfYear)}
+              </td>
+              <td>
+                {currencyFormatter.format(row.interest)}
+              </td>
+              <td>
+                {currencyFormatter.format(
+                  row.valueEndOfYear -
+                    (initialInvestment + row.annualInvestment * row.year)
+                )}
+              </td>
+              <td>
+                {currencyFormatter.format(
+                  initialInvestment + row.annualInvestment * row.year
+                )}
               </td>
             </tr>
           )}

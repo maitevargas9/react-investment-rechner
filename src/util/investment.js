@@ -1,14 +1,14 @@
 export function computeInvestmentGrowth({
   initialInvestment,
   annualInvestment,
-  expectedReturn,
+  yields,
   duration
 }) {
   const investmentTimeline = [];
   let currentInvestment = initialInvestment;
 
   for (let year = 1; year <= duration; year++) {
-    const yearlyInterest = currentInvestment * (expectedReturn / 100);
+    const yearlyInterest = currentInvestment * (yields / 100);
     currentInvestment += yearlyInterest + annualInvestment;
 
     investmentTimeline.push({

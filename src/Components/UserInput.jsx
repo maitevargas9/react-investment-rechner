@@ -1,12 +1,19 @@
 import { useState } from "react";
 
 export default function UserInput({ userInput, setUserInput }) {
+  const [errors, setErrors] = useState({});
+
   const handleChange = e => {
     const { name, value } = e.target;
-    setUserInput(prev => ({
-      ...prev,
-      [name]: value === "" ? "" : Number(value)
-    }));
+    setUserInput(prev => ({ ...prev, [name]: parseFloat(value) || 0 }));
+    if (name === "duration" && value < 1) {
+      setErrors(prev => ({
+        ...prev,
+        duration: "Bitte geben Sie eine gültige Dauer ein (mind. 1 Jahr)."
+      }));
+    } else {
+      setErrors(prev => ({ ...prev, duration: null }));
+    }
   };
 
   return (
@@ -33,8 +40,8 @@ export default function UserInput({ userInput, setUserInput }) {
         Yield
         <input
           type="number"
-          name="yield"
-          value={userInput.yield}
+          name="yields"
+          value={userInput.yields}
           onChange={handleChange}
         />
       </label>
@@ -46,6 +53,10 @@ export default function UserInput({ userInput, setUserInput }) {
           value={userInput.duration}
           onChange={handleChange}
         />
+        {errors.duration &&
+          <p style={{ color: "red" }}>
+            {errors.duration}
+          </p>}
       </label>
     </section>
   );
