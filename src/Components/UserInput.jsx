@@ -5,7 +5,7 @@ export default function UserInput({ userInput, setUserInput }) {
 
   const handleChange = e => {
     const { name, value } = e.target;
-    setUserInput(prev => ({ ...prev, [name]: parseFloat(value) || 0 }));
+    setUserInput(prev => ({ ...prev, [name]: parseFloat(value) }));
     if (name === "duration" && value < 1) {
       setErrors(prev => ({
         ...prev,
@@ -53,6 +53,7 @@ export default function UserInput({ userInput, setUserInput }) {
           <input
             type="number"
             name="duration"
+            min="1"
             value={userInput.duration}
             onChange={handleChange}
           />

@@ -12,11 +12,13 @@ function App() {
     duration: 10
   });
 
+  const isValid = userInput.duration >= 1;
+
   return (
     <div>
       <Header />
       <UserInput userInput={userInput} setUserInput={setUserInput} />
-      <Results userInput={userInput} />
+      {isValid && <Results userInput={userInput} />}
     </div>
   );
 }
